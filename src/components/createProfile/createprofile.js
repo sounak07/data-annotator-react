@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Input from '../UI/input';
 import { Redirect, withRouter } from 'react-router-dom';
-import { create_Profile } from '../../store/actions/profileAction';
 
 class createProfile extends Component {
   state = {
@@ -100,6 +99,6 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { create_Profile })(
+export default connect(mapStateToProps, { })(
   withRouter(createProfile)
 );
