@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 
 class Dash extends Component {
    render() {
-    const { users } = this.props.auth;
+    const { users} = this.props.auth;
+
+    const { isAdmin } = users;
 
    return (
       <div>
@@ -12,10 +14,9 @@ class Dash extends Component {
           <p className="lead text-muted">Welcome {users.email}</p>
         </div>
         <div>
-          <p>You have not yet setup a profile, please add some info</p>
-          <Link to="/createprofile" className="btn btn-lg btn-info">
-            Create Profile
-          </Link>
+         {isAdmin && <Link to="/addImages" className="btn btn-lg btn-info">
+           Add Images
+          </Link>}
         </div>
 
       </div>

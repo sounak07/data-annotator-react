@@ -10,7 +10,7 @@ import Landing from './components/layouts/landing';
 import Login from './components/auth/login';
 import Register from './components/auth/register';
 import Dashboard from './components/profileDash/dashboard';
-import createProfile from './components/createProfile/createprofile';
+import AddImages from './components/addImages';
 import ProtectedRoute from './components/ProtectedRoutes'
 
 class App extends Component {
@@ -29,7 +29,7 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Switch>
               <ProtectedRoute exact path="/dashboard" component={Dashboard} />
-              <ProtectedRoute exact path="/createprofile" component={createProfile} />
+              <ProtectedRoute exact path="/addImages" component={AddImages} />
             </Switch>
           </div>
         </div>
