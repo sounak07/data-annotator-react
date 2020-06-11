@@ -22,7 +22,7 @@ function AllImages(props) {
         {imgs.length > 0 && imgs.map((img) => (
           <div className="col-lg-4 col-md-4 col-6" key={img._id}>
             <div className="card" >
-              <Link to="" className="d-block mb-4 h-100">
+              <Link to={`img/${img._id}`} className="d-block mb-4 h-100">
                 <img className="card-img-top" src={img.url || 'http://via.placeholder.com/400x300'} alt="" />
                 <div className="card-body text-white rgba-black-light p-2">
                   {img.name}

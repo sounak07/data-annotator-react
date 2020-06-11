@@ -13,6 +13,7 @@ import Dashboard from './components/profileDash/dashboard';
 import AddImages from './components/addImages';
 import AllImages from './components/allImages/index'
 import ProtectedRoute from './components/ProtectedRoutes'
+import ImageDetail from './components/imageDetails'
 
 class App extends Component {
   componentDidMount() {
@@ -32,6 +33,7 @@ class App extends Component {
               <ProtectedRoute exact path="/dashboard" component={Dashboard} />
               <ProtectedRoute exact path="/addImages" component={AddImages} />
               <ProtectedRoute exact path="/allImages" component={AllImages} />
+              <ProtectedRoute exact path="/img/:id" component={ImageDetail} />
             </Switch>
           </div>
         </div>

@@ -44,6 +44,7 @@ export const getImgs = () => {
       .then((res) => {
         if(res.data.length > 0){
           console.log(res.data[0].images);
+          //TODO: loop through the res.data array
           dispatch(saveGetImgs(res.data[0].images));
         }
       })
