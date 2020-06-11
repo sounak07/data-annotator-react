@@ -72,11 +72,9 @@ function AddImages(props){
      props.saveImgs(imgUrls, history);
   }
 
-  
-    return (
-      <div>
-        <div className="add-images">
-          <div className="container">
+  return (
+      <div className="add-images">
+        <div className="container">
             <div className="row">
               <div className="col-md-8 m-auto">
                 <h1 className="display-4 text-center">Upload Images</h1>
@@ -91,12 +89,11 @@ function AddImages(props){
                 <br/>
                 <br/>
                 <button onClick={handleSave} disabled={saveButtonState} className="btn btn-info">Save</button>
-               </div>
-            </div>
+              </div>
           </div>
         </div>
       </div>
-    );
+  );
   
 }
 
