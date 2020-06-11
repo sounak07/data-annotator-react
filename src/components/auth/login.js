@@ -5,8 +5,6 @@ import { loginUser } from '../../store/actions/authActions';
 import Input from '../UI/input';
 
 class Login extends Component {
-  // const errors = this.props.errors;
-
   state = {
     email: '',
     password: '',

@@ -1,0 +1,17 @@
+.rotate-button-div {
+  margin-bottom: 50px;
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.annatation-button-div{
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 50px;
+}
+
+.figure-div {
+  margin-top: 100px;
+}
+
