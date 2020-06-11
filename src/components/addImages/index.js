@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, useHistory } from 'react-router-dom';
 import { storage } from '../../firebase-config';
+import ProgressBar from '../UI/progress';
+import { saveImgs } from "../../store/actions/imageActions"
 import './index.css'
 
-function AddImages(){
+function AddImages(props){
 
   const [imgFiles, setImgFiles] = useState([]);
 
@@ -12,14 +14,22 @@ function AddImages(){
 
   const [buttonState, setButtonState] = useState(true);
 
+  const [saveButtonState, setSaveButtonState] = useState(true);
+
   const [pro, setpro] = useState(0);
+
+  const history = useHistory();
 
   useEffect(() => {
 
     if(imgFiles.length > 0){
       setButtonState(false);
     }
-  }, [imgFiles]);
+
+    if(imgUrls.length > 0){
+      setSaveButtonState(false);
+    }
+  }, [imgFiles, imgUrls]);
 
   const onChangeHandler = event => {
     const files = event.target.files;
@@ -58,6 +68,10 @@ function AddImages(){
     })
   }
 
+  const handleSave = () => {
+     props.saveImgs(imgUrls, history);
+  }
+
   
     return (
       <div>
@@ -67,11 +81,16 @@ function AddImages(){
               <div className="col-md-8 m-auto">
                 <h1 className="display-4 text-center">Upload Images</h1>
                   <div className="form-group files">
-                    <label>Upload Your Images </label>
+                  <label>Upload Your Images </label>
+                  <small className="d-block pb-3">Select Multiple Images with Shift+Click</small>
                   <input type="file" className="form-control" multiple onChange={onChangeHandler} />
-                  {pro > 0 && <span>{pro}</span>}
-                  </div>  
+                  </div>
+                {pro > 0 && <ProgressBar percentage={pro} />}
+                <br/>
                 <button onClick={handleUpload} disabled={buttonState} className="btn btn-success">Upload Images</button>
+                <br/>
+                <br/>
+                <button onClick={handleSave} disabled={saveButtonState} className="btn btn-info">Save</button>
                </div>
             </div>
           </div>
@@ -85,6 +104,6 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { })(
+export default connect(mapStateToProps, { saveImgs })(
   withRouter(AddImages)
 );
