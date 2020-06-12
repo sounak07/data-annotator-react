@@ -88,10 +88,12 @@ function ImageDetail(props) {
     props.saveAnnotations({ ...fields, imageId: props.match.params.id}, history);
   }
 
+  const { loading } = props.load;
+
   return(
     <div className="image-view">
       <div className="" style={{ marginBottom: '10px' }}>
-        <button onClick={handleGoBack} className="btn btn-info">Go back</button>
+        <button onClick={handleGoBack} className="btn btn-info">Go to Images List</button>
       </div>
        <div className="row">
           <div className={grid}>
@@ -99,7 +101,7 @@ function ImageDetail(props) {
             {currImg.length > 0 && <div className="row">
               <div className="col-12">
                 <figure className="figure figure-div">
-                  <img style={{ transform: `rotate(${currpostion}deg)` }} src={currImg[0].url} alt="view" className="figure-img img-fluid rounded" />
+                <img style={{ transform: `rotate(${currpostion}deg)` }} src={currImg[0].url || 'http://via.placeholder.com/400x300'} alt="view" className="figure-img img-fluid rounded" />
                   <figcaption className="figure-caption">{currImg[0].name}</figcaption>
                 </figure>
               </div>
@@ -114,22 +116,26 @@ function ImageDetail(props) {
           </div>
         {grid === 'col-12 col-md-7' && <div className="col-12 col-md-5 form-annotation">
           <h4 className="">Fill Annotation</h4>
-          <Input
-            type="text"
-            name="type"
-            placeholder="Enter type"
-            value={fields.type}
-            onChange={handleChange}
-          />
-          <TextArea
-            placeholder="Enter Annotation Details"
-            name="details"
-            rows="5"
-            value={fields.details}
-            onChange={handleChange}
-          />
-          <button onClick={handleSubmit} disabled={error} className="btn btn-outline-primary">Submit Annotation</button>
-          <button onClick={handleCancel} style={{marginLeft: '8px'}} className="btn btn-outline-danger">Cancel</button>
+          {loading ? <Loader /> : 
+          <div>
+              <Input
+                type="text"
+                name="type"
+                placeholder="Enter type"
+                value={fields.type}
+                onChange={handleChange}
+              />
+              <TextArea
+                placeholder="Enter Annotation Details"
+                name="details"
+                rows="5"
+                value={fields.details}
+                onChange={handleChange}
+              />
+              <button onClick={handleSubmit} disabled={error} className="btn btn-outline-primary">Submit Annotation</button>
+              <button onClick={handleCancel} style={{ marginLeft: '8px' }} className="btn btn-outline-danger">Cancel</button>
+          </div>
+          }
         </div>}
        </div>
     </div>
@@ -138,7 +144,8 @@ function ImageDetail(props) {
 
 const mapStateToProps = (state) => {
   return {
-    imgs: state.imgs
+    imgs: state.imgs,
+    load: state.load,
   }
 }
 

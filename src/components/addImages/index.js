@@ -82,20 +82,25 @@ function AddImages(props){
      props.saveImgs(imgUrls, history);
   }
 
+  const { loading } = props.load;
+
   return (
       <div className="add-images">
         <div className="row">
           <div className="col-12">
             <h2 className="display-4 text-center">Admin Panel</h2>
-              <div className="form-group files">
+            <div className="form-group files">
               <label>Upload Your Images </label>
               <small className="d-block pb-3">Select Multiple Images with Shift+Click</small>
               <input type="file" className="form-control" multiple onChange={onChangeHandler} />
-              </div>
+            </div>
             {pro > 0 && <ProgressBar percentage={pro} />}
             <br/>
-            <button onClick={handleUpload} disabled={buttonState} className="btn btn-success">Upload Images</button>
-            <button style={{marginLeft: '8px'}} onClick={handleSave} disabled={saveButtonState} className="btn btn-info">Save</button>
+            {loading ? <Loader /> : 
+            <>
+              <button onClick={handleUpload} disabled={buttonState} className="btn btn-success">Upload Images</button>
+              <button style={{ marginLeft: '8px' }} onClick={handleSave} disabled={saveButtonState} className="btn btn-info">Save</button>
+            </>}
           </div>
         </div>
         <div className="row">
@@ -112,6 +117,7 @@ function AddImages(props){
 const mapStateToProps = (state) => ({
   auth: state.auth,
   imgs: state.imgs,
+  load: state.load
 });
 
 export default connect(mapStateToProps, { saveImgs, getAllAnnotations })(

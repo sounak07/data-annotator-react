@@ -9,6 +9,13 @@ export const saveUser = (userData) => {
   };
 };
 
+export const setLoading = (data) => {
+  return {
+    type: actionTypes.LOADING,
+    payload: data,
+  };
+}
+
 export const errorsSet = (errors) => {
   return {
     type: actionTypes.ALL_ERRORS,
@@ -18,10 +25,12 @@ export const errorsSet = (errors) => {
 
 export const saveImgs = (data, history) => {
   return (dispatch) => {
+    dispatch(setLoading(true));
     axios
       .post('/api/user/uploadbase', data)
       .then((res) => {
         console.log(res.data);
+        dispatch(setLoading(false));
         history.push('/dashboard');
       })
       .catch((e) => {
@@ -55,13 +64,17 @@ export const getImgs = () => {
 
 export const saveAnnotations = (data ,history) => {
   return (dispatch) => {
+    dispatch(setLoading(true));
     axios
       .post('/api/annotation/add', data)
       .then((res) => {
         console.log(res.data);
+        dispatch(setLoading(false));
+        alert("Submission Success");
         history.push('/dashboard');
       })
       .catch((e) => {
+        dispatch(setLoading(false));
         dispatch(errorsSet(e.response.data));
       });
   };

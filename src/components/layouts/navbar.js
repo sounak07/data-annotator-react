@@ -42,19 +42,19 @@ class Navbar extends Component {
                 </li>
               </ul>
             ) : (
-              <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <NavLink className="nav-link" to="/dashboard">
-                    Dashboard
+                <ul className="navbar-nav ml-auto">
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to="/dashboard">
+                      Dashboard
                   </NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink className="nav-link" to="/" onClick={this.onLogOut}>
-                    Logout
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to="/" onClick={this.onLogOut}>
+                      Logout
                   </NavLink>
-                </li>
-              </ul>
-            )}
+                  </li>
+                </ul>
+              )}
           </div>
         </div>
       </nav>
