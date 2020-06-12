@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter, useHistory } from 'react-router-dom';
 import { storage } from '../../firebase-config';
 import ProgressBar from '../UI/progress';
-import { saveImgs } from "../../store/actions/imageActions"
+import { saveImgs } from "../../store/actions/imageActions";
+import {getAllAnnotations} from "../../store/actions/imageActions";
 import './index.css'
 
 function AddImages(props){
@@ -19,6 +20,10 @@ function AddImages(props){
   const [pro, setpro] = useState(0);
 
   const history = useHistory();
+
+  useEffect(() => {
+    props.getAllAnnotations();
+  },[props]);
 
   useEffect(() => {
 
@@ -99,6 +104,6 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { saveImgs })(
+export default connect(mapStateToProps, { saveImgs, getAllAnnotations })(
   withRouter(AddImages)
 );

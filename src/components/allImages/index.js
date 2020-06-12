@@ -26,7 +26,7 @@ function AllImages(props) {
                 <img className="card-img-top" src={img.url || 'http://via.placeholder.com/400x300'} alt="" />
                 <div className="card-body text-white rgba-black-light p-2">
                   {img.name}
-              </div>
+                </div>
               </Link>
             </div>
           </div>  

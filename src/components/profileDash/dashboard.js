@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {getImgs} from "../../store/actions/imageActions";
+import {getImgs, getUserAnnotations} from "../../store/actions/imageActions";
+import AnnotationList from '../annotationList'
 
 class Dash extends Component {
 
   componentDidMount() {
     this.props.getImgs();
+    this.props.getUserAnnotations();
   }
 
    render() {
     const { users} = this.props.auth;
+
+     const { userAnnotations } = this.props.imgs;
 
     const { isAdmin } = users;
 
@@ -30,7 +34,10 @@ class Dash extends Component {
            Go to Images to Annotate
          </Link>
        </div>
-
+       <div className="annotation-table" style={{marginTop : '30px'}}>
+         {userAnnotations.length < 1 && <h3>No Entries yet!</h3>}
+         {userAnnotations.length > 0 && <AnnotationList text="My" userAnnotations={userAnnotations} />}
+       </div>
       </div>
     );
   }
@@ -38,6 +45,7 @@ class Dash extends Component {
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  imgs: state.imgs 
 });
 
-export default connect(mapStateToProps, { getImgs })(Dash);
+export default connect(mapStateToProps, { getImgs, getUserAnnotations })(Dash);

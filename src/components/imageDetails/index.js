@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Loader from '../UI/Loader';
 import Input from '../UI/input';
 import TextArea from '../UI/textArea';
+import {saveAnnotations} from '../../store/actions/imageActions'
 import './index.css';
 
 function ImageDetail(props) {
@@ -84,7 +85,7 @@ function ImageDetail(props) {
   }
 
   const handleSubmit = () =>{
-    console.log(fields);
+    props.saveAnnotations({ ...fields, imageId: props.match.params.id}, history);
   }
 
   return(
@@ -141,4 +142,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {})(ImageDetail);
+export default connect(mapStateToProps, {saveAnnotations})(ImageDetail);
