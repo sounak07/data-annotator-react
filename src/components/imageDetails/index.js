@@ -101,7 +101,7 @@ function ImageDetail(props) {
             {currImg.length > 0 && <div className="row">
               <div className="col-12">
                 <figure className="figure figure-div">
-                <img style={{ transform: `rotate(${currpostion}deg)` }} src={currImg[0].url || 'http://via.placeholder.com/400x300'} alt="view" className="figure-img img-fluid rounded" />
+                  <img style={{ transform: `rotate(${currpostion}deg)` }} src={currImg[0].url || 'http://via.placeholder.com/400x300'} alt="view" className="figure-img img-fluid rounded" />
                   <figcaption className="figure-caption">{currImg[0].name}</figcaption>
                 </figure>
               </div>

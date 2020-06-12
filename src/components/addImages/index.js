@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, useHistory } from 'react-router-dom';
+import { withRouter, useHistory, Redirect } from 'react-router-dom';
 import { storage } from '../../firebase-config';
 import ProgressBar from '../UI/progress';
 import { saveImgs } from "../../store/actions/imageActions";
@@ -84,31 +84,36 @@ function AddImages(props){
 
   const { loading } = props.load;
 
+  const { users: { isAdmin } } = props.auth;
+
   return (
-      <div className="add-images">
-        <div className="row">
-          <div className="col-12">
-            <h2 className="display-4 text-center">Admin Panel</h2>
-            <div className="form-group files">
-              <label>Upload Your Images </label>
-              <small className="d-block pb-3">Select Multiple Images with Shift+Click</small>
-              <input type="file" className="form-control" multiple onChange={onChangeHandler} />
+      <div>
+      {!isAdmin ? <Redirect to="/" /> : 
+        <div className="add-images">
+          <div className="row">
+            <div className="col-12">
+              <h2 className="display-4 text-center">Admin Panel</h2>
+              <div className="form-group files">
+                <label>Upload Your Images </label>
+                <small className="d-block pb-3">Select Multiple Images with Shift+Click</small>
+                <input type="file" className="form-control" multiple onChange={onChangeHandler} />
+              </div>
+              {pro > 0 && <ProgressBar percentage={pro} />}
+              <br />
+              {loading ? <Loader /> :
+                <>
+                  <button onClick={handleUpload} disabled={buttonState} className="btn btn-success">Upload Images</button>
+                  <button style={{ marginLeft: '8px' }} onClick={handleSave} disabled={saveButtonState} className="btn btn-info">Save</button>
+                </>}
             </div>
-            {pro > 0 && <ProgressBar percentage={pro} />}
-            <br/>
-            {loading ? <Loader /> : 
-            <>
-              <button onClick={handleUpload} disabled={buttonState} className="btn btn-success">Upload Images</button>
-              <button style={{ marginLeft: '8px' }} onClick={handleSave} disabled={saveButtonState} className="btn btn-info">Save</button>
-            </>}
           </div>
-        </div>
-        <div className="row">
-          <div className="col-12">
-            { allAnnotationDetails.length < 1 && <Loader /> }
-            { allAnnotationDetails.length > 0 && <AllAnnotationList allAnnotations={allAnnotationDetails} />}
+          <div className="row">
+            <div className="col-12">
+              {allAnnotationDetails.length < 1 && <Loader />}
+              {allAnnotationDetails.length > 0 && <AllAnnotationList allAnnotations={allAnnotationDetails} />}
+            </div>
           </div>
-        </div>
+        </div>}
       </div>
   );
   
