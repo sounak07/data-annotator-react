@@ -65,6 +65,11 @@ export const logoutHandler = () => {
   setAuthToken(false);
   return (dispatch) => {
     dispatch(saveUser({}));
+    dispatch({
+      type: actionTypes.SAVE_USER_ANNOTATIONS,
+      payload: []
+    })
+    dispatch(errorsSet({}));
   };
 };
 

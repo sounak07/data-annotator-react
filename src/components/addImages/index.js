@@ -109,6 +109,7 @@ function AddImages(props){
           </div>
           <div className="row">
             <div className="col-12">
+              <h3 className="detail-title">Entries from all annotators</h3>
               {allAnnotationDetails.length < 1 && <Loader />}
               {allAnnotationDetails.length > 0 && <AllAnnotationList allAnnotations={allAnnotationDetails} />}
             </div>

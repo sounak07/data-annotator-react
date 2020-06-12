@@ -70,7 +70,7 @@ export const saveAnnotations = (data ,history) => {
       .then((res) => {
         console.log(res.data);
         dispatch(setLoading(false));
-        alert("Submission Success");
+        alert("Submission Success, Thank You!");
         history.push('/dashboard');
       })
       .catch((e) => {
@@ -82,6 +82,7 @@ export const saveAnnotations = (data ,history) => {
 
 export const getUserAnnotations = () => {
   return (dispatch) => {
+    dispatch(setLoading(true));
     axios
       .get('/api/annotation/')
       .then((res) => {
@@ -90,8 +91,10 @@ export const getUserAnnotations = () => {
           type: actionTypes.SAVE_USER_ANNOTATIONS,
           payload: res.data
         })
+        dispatch(setLoading(false));
       })
       .catch((e) => {
+        dispatch(setLoading(false));
         dispatch(errorsSet(e.response.data));
       });
   };
