@@ -10,6 +10,13 @@ export const saveUser = (userData) => {
   };
 };
 
+export const setLoading = (data) =>{
+  return {
+    type: actionTypes.LOADING,
+    payload: data,
+  };
+}
+
 export const errorsSet = (errors) => {
   return {
     type: actionTypes.ALL_ERRORS,
@@ -19,6 +26,7 @@ export const errorsSet = (errors) => {
 
 export const loginUser = (data) => {
   return (dispatch) => {
+    dispatch(setLoading(true));
     axios
       .post('/api/user/login', data)
       .then((res) => {
@@ -27,8 +35,10 @@ export const loginUser = (data) => {
         setAuthToken(token);
         const userD = jwt_decode(token);
         dispatch(saveUser(userD));
+        dispatch(setLoading(false));
       })
       .catch((e) => {
+        dispatch(setLoading(false));
         dispatch(errorsSet(e.response.data));
       });
   };
@@ -36,12 +46,15 @@ export const loginUser = (data) => {
 
 export const registerUser = (data, history) => {
   return (dispatch) => {
+    dispatch(setLoading(true));
     axios
       .post('/api/user/register', data)
       .then((res) => {
         history.push('/login');
+        dispatch(setLoading(false));
       })
       .catch((e) => {
+        dispatch(setLoading(false));
         dispatch(errorsSet(e.response.data));
       });
   };

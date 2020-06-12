@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { registerUser } from '../../store/actions/authActions';
 import Input from '../UI/input';
+import Loader from '../UI/Loader';
 
 class Register extends Component {
   state = {
@@ -36,10 +37,15 @@ class Register extends Component {
   render() {
     const { isAuth } = this.props.auth;
 
+    const { errors } = this.props.error;
+
+    const { loading } = this.props.load;
+
     return (
       <div>
-        {isAuth ? this.props.history.push('/dashboard') : null}
-        <div className="register">
+        {isAuth ? this.props.history.push('/dashboard') : 
+         <div className="register">
+          {loading ? <Loader /> :
           <div className="container">
             <div className="row">
               <div className="col-md-8 m-auto">
@@ -51,7 +57,7 @@ class Register extends Component {
                     name="email"
                     placeholder="Enter email"
                     onChange={this.inputHandler}
-                    // error={errors.signupemail}
+                    error={errors.signupemail}
                     value={this.state.email}
                   />
                   <Input
@@ -59,7 +65,7 @@ class Register extends Component {
                     name="password"
                     placeholder="Password"
                     onChange={this.inputHandler}
-                    // error={errors.signupPassword}
+                    error={errors.signupPassword}
                     value={this.state.password}
                   />
                   <Input
@@ -67,7 +73,7 @@ class Register extends Component {
                     name="password2"
                     placeholder="Confirm Password"
                     onChange={this.inputHandler}
-                    // error={errors.password2}
+                    error={errors.password2}
                     value={this.state.password2}
                   />
                   <input
@@ -77,8 +83,8 @@ class Register extends Component {
                 </form>
               </div>
             </div>
-          </div>
-        </div>
+          </div>}
+        </div>}
       </div>
     );
   }
@@ -87,6 +93,7 @@ class Register extends Component {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   error: state.errors,
+  load: state.load
 });
 
 export default connect(mapStateToProps, { registerUser })(withRouter(Register));

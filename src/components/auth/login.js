@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { loginUser } from '../../store/actions/authActions';
 import Input from '../UI/input';
+import Loader from '../UI/Loader'
 
 class Login extends Component {
   state = {
@@ -32,10 +33,14 @@ class Login extends Component {
   render() {
     const { isAuth } = this.props.auth;
 
+    const { loading } = this.props.load;
+
+    const { errors } = this.props.error;
+
     return (
       <div>
-        {isAuth ? this.props.history.push('/dashboard') : null}
-        <div className="login">
+        {isAuth ? this.props.history.push('/dashboard') : <div className="login">
+          {loading ? <Loader /> :
           <div className="container">
             <div className="row">
               <div className="col-md-8 m-auto">
@@ -47,7 +52,7 @@ class Login extends Component {
                     name="email"
                     placeholder="email number"
                     onChange={this.inputHandler}
-                    // error={errors.loginemail}
+                    error={errors.loginemail}
                     value={this.state.email}
                   />
                   <Input
@@ -55,7 +60,7 @@ class Login extends Component {
                     name="password"
                     placeholder="Password"
                     onChange={this.inputHandler}
-                    // error={errors.loginPassword}
+                    error={errors.loginPassword}
                     value={this.state.password}
                   />
                   <input
@@ -65,8 +70,8 @@ class Login extends Component {
                 </form>
               </div>
             </div>
-          </div>
-        </div>
+          </div>}
+        </div>}
       </div>
     );
   }
@@ -75,6 +80,7 @@ class Login extends Component {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   error: state.errors,
+  load: state.load
 });
 
 export default connect(mapStateToProps, { loginUser })(withRouter(Login));

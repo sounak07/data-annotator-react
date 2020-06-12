@@ -25,7 +25,7 @@ class Dash extends Component {
         </div>
         <div>
          {isAdmin && <Link to="/addImages" className="btn btn-lg btn-info">
-           Add Images
+           Admin Panel
           </Link>}
         </div>
         <br/>
