@@ -2,6 +2,10 @@ img {
   width: 100%;
 }
 
+.container {
+  max-width: 80% !important;
+}
+
 .landing {
   position: relative;
   background: url("./assets/img/showcase.jpg") no-repeat;

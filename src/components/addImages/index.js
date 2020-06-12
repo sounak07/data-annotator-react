@@ -74,7 +74,6 @@ function AddImages(props){
 
   return (
       <div className="add-images">
-        <div className="container">
             <div className="row">
               <div className="col-md-8 m-auto">
                 <h1 className="display-4 text-center">Upload Images</h1>
@@ -91,7 +90,6 @@ function AddImages(props){
                 <button onClick={handleSave} disabled={saveButtonState} className="btn btn-info">Save</button>
               </div>
           </div>
-        </div>
       </div>
   );
   
