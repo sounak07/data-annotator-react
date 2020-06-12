@@ -15,7 +15,7 @@ function AnnotationList({ userAnnotations, text}) {
           </tr>
         </thead>
         <tbody>
-          {userAnnotations.map((anno, i) => (
+          {userAnnotations.length > 0 && userAnnotations.map((anno, i) => (
             <tr key={i}>
               <th scope="row">{i+1}</th>
               <td>{anno.type}</td>

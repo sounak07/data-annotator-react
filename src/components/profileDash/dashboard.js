@@ -35,8 +35,10 @@ class Dash extends Component {
          </Link>
        </div>
        <div className="annotation-table" style={{marginTop : '30px'}}>
-         {userAnnotations.length < 1 && <h3>No Entries yet!</h3>}
-         {userAnnotations.length > 0 && <AnnotationList text="My" userAnnotations={userAnnotations} />}
+         {userAnnotations.length < 1 ? 
+          <h3>No Entries yet!</h3> : 
+          <AnnotationList text="My" userAnnotations={userAnnotations} />
+         }
        </div>
       </div>
     );

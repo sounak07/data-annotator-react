@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, useHistory } from 'react-router-dom';
@@ -5,6 +6,8 @@ import { storage } from '../../firebase-config';
 import ProgressBar from '../UI/progress';
 import { saveImgs } from "../../store/actions/imageActions";
 import {getAllAnnotations} from "../../store/actions/imageActions";
+import AllAnnotationList from '../allAnnotationList';
+import Loader from '../UI/Loader'
 import './index.css'
 
 function AddImages(props){
@@ -21,9 +24,11 @@ function AddImages(props){
 
   const history = useHistory();
 
+  const { allAnnotationDetails } = props.imgs;
+
   useEffect(() => {
     props.getAllAnnotations();
-  },[props]);
+  }, []);
 
   useEffect(() => {
 
@@ -79,22 +84,26 @@ function AddImages(props){
 
   return (
       <div className="add-images">
-            <div className="row">
-              <div className="col-md-8 m-auto">
-                <h1 className="display-4 text-center">Upload Images</h1>
-                  <div className="form-group files">
-                  <label>Upload Your Images </label>
-                  <small className="d-block pb-3">Select Multiple Images with Shift+Click</small>
-                  <input type="file" className="form-control" multiple onChange={onChangeHandler} />
-                  </div>
-                {pro > 0 && <ProgressBar percentage={pro} />}
-                <br/>
-                <button onClick={handleUpload} disabled={buttonState} className="btn btn-success">Upload Images</button>
-                <br/>
-                <br/>
-                <button onClick={handleSave} disabled={saveButtonState} className="btn btn-info">Save</button>
+        <div className="row">
+          <div className="col-12">
+            <h2 className="display-4 text-center">Admin Panel</h2>
+              <div className="form-group files">
+              <label>Upload Your Images </label>
+              <small className="d-block pb-3">Select Multiple Images with Shift+Click</small>
+              <input type="file" className="form-control" multiple onChange={onChangeHandler} />
               </div>
+            {pro > 0 && <ProgressBar percentage={pro} />}
+            <br/>
+            <button onClick={handleUpload} disabled={buttonState} className="btn btn-success">Upload Images</button>
+            <button style={{marginLeft: '8px'}} onClick={handleSave} disabled={saveButtonState} className="btn btn-info">Save</button>
           </div>
+        </div>
+        <div className="row">
+          <div className="col-12">
+            { allAnnotationDetails.length < 1 && <Loader /> }
+            { allAnnotationDetails.length > 0 && <AllAnnotationList allAnnotations={allAnnotationDetails} />}
+          </div>
+        </div>
       </div>
   );
   
@@ -102,6 +111,7 @@ function AddImages(props){
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  imgs: state.imgs,
 });
 
 export default connect(mapStateToProps, { saveImgs, getAllAnnotations })(
