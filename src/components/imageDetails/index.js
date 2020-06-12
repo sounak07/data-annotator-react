@@ -14,11 +14,19 @@ function ImageDetail(props) {
 
   const [currpostion, setCurrpostion] = useState(0);
 
+  const [error, setError] = useState(true);
+
+  const [fields, setFields] = useState({
+    type: '',
+    details:'',
+  });
+
   const [grid, setgrid] = useState("col-12");
 
   const handleGoBack = () => {
     history.push('/allImages');
   }
+
 
   useEffect(() => {
     if (props.match.params.id) {
@@ -29,6 +37,18 @@ function ImageDetail(props) {
     }
 
   },[props.imgs.imgs, props.match.params.id])
+
+
+  useEffect(() => {
+
+    const isValid = () => Object.keys(fields).find((f) => !fields[f]);
+
+    if(!isValid()){
+      setError(false);
+    }else {
+      setError(true);
+    }
+  },[fields])
 
   const rotateClockWise = () => {
     let newRotation = currpostion + 90;
@@ -54,6 +74,17 @@ function ImageDetail(props) {
 
   const handleCancel = () => {
     setgrid("col-12");
+  }
+
+  const handleChange = (event) => {
+
+    const {name, value} = event.target;
+
+    setFields({...fields,[name]: value});
+  }
+
+  const handleSubmit = () =>{
+    console.log(fields);
   }
 
   return(
@@ -84,21 +115,19 @@ function ImageDetail(props) {
           <h4 className="">Fill Annotation</h4>
           <Input
             type="text"
-            name="Annotattion"
+            name="type"
             placeholder="Enter type"
-          // onChange={this.inputHandler}
-          // error={errors.loginemail}
-          // value={this.state.email}
+            value={fields.type}
+            onChange={handleChange}
           />
           <TextArea
             placeholder="Enter Annotation Details"
-            name="Details"
+            name="details"
             rows="5"
-          // value={this.state.website}
-          // onChange={this.onChange}
-          // error={errors.website}
+            value={fields.details}
+            onChange={handleChange}
           />
-          <button className="btn btn-outline-primary">Submit Annotation</button>
+          <button onClick={handleSubmit} disabled={error} className="btn btn-outline-primary">Submit Annotation</button>
           <button onClick={handleCancel} style={{marginLeft: '8px'}} className="btn btn-outline-danger">Cancel</button>
         </div>}
        </div>
