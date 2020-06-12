@@ -10,7 +10,7 @@ import Landing from './components/layouts/landing';
 import Login from './components/auth/login';
 import Register from './components/auth/register';
 import Dashboard from './components/profileDash/dashboard';
-import AddImages from './components/addImages';
+import AddImages from './components/admin-panel';
 import AllImages from './components/allImages/index'
 import ProtectedRoute from './components/ProtectedRoutes'
 import ImageDetail from './components/imageDetails'
@@ -31,7 +31,7 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Switch>
               <ProtectedRoute exact path="/dashboard" component={Dashboard} />
-              <ProtectedRoute exact path="/addImages" component={AddImages} />
+              <ProtectedRoute exact path="/admin" component={AddImages} />
               <ProtectedRoute exact path="/allImages" component={AllImages} />
               <ProtectedRoute exact path="/img/:id" component={ImageDetail} />
             </Switch>

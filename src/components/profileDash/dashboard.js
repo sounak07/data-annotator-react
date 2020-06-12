@@ -24,10 +24,10 @@ class Dash extends Component {
     return (
       <div>
         <div>
-          <p className="lead text-muted">Welcome {users.email}</p>
+        <p className="lead text-muted">Welcome {users.email} {isAdmin ? '(Admin)' : null}</p>
         </div>
         <div>
-          {isAdmin && <Link to="/addImages" className="btn btn-lg btn-info">
+          {isAdmin && <Link to="/admin" className="btn btn-lg btn-info">
             Admin Panel
           </Link>}
         </div>
