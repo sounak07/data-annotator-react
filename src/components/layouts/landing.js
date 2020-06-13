@@ -9,13 +9,13 @@ class Landing extends Component {
 
     return (
       <div>
-        {isAuth ? <Redirect to="/dashboard" /> : null}
+        {isAuth ? <Redirect to="/dashboard" /> :
         <div className="landing">
           <div className="dark-overlay landing-inner text-light">
             <div className="container">
               <div className="row">
                 <div className="col-md-12 text-center">
-                  <h1 className="display-3 mb-4">Project</h1>
+                  <h2 className="display-3 mb-4">Welcome to Coolest Annotator, called Grip!</h2>
                   <hr />
                   <Link to="/register" className="btn btn-lg btn-primary">
                     Sign Up
@@ -27,7 +27,7 @@ class Landing extends Component {
               </div>
             </div>
           </div>
-        </div>
+        </div>}
       </div>
     );
   }
