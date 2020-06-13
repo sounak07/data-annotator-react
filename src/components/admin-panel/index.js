@@ -96,7 +96,7 @@ function AddImages(props){
               <div className="form-group files">
                 <label>Upload Your Images </label>
                 <small className="d-block pb-3">Select Multiple Images with Shift+Click</small>
-                <input type="file" className="form-control" multiple onChange={onChangeHandler} />
+                <input type="file" className="form-control" multiple accept='image/*' onChange={onChangeHandler} />
               </div>
               {pro > 0 && <ProgressBar percentage={pro} />}
               <br />
