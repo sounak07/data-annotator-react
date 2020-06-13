@@ -1,3 +1,21 @@
+You can find the app deployed here : 
+https://gripannotator.netlify.app/dashboard
+
+Login creds :
+
+Admin:
+email : sounakume@gmail.com
+pass: 123456
+
+users :
+email : rickmath08@gmail.com
+pass: 123456
+
+email : smartrick08@gmail.com
+pass: 123456
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
