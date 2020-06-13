@@ -3,18 +3,20 @@ https://gripannotator.netlify.app/
 
 Login creds :
 
-Admin:
+## Admin:
 email : sounakume@gmail.com
 pass: 123456
 
-users :
+## users:
 email : rickmath08@gmail.com
 pass: 123456
 
 email : smartrick08@gmail.com
 pass: 123456
 
+## note
 
+I'm using free plans for everything, so there might some latency issues for response, please bare with for that!
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
