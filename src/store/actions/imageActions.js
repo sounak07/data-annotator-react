@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import axios from 'axios';
+import Http from '../../services/services';
 
 
 export const saveUser = (userData) => {
@@ -26,8 +26,8 @@ export const errorsSet = (errors) => {
 export const saveImgs = (data, history) => {
   return (dispatch) => {
     dispatch(setLoading(true));
-    axios
-      .post('/api/user/uploadbase', data)
+    Http
+      .post('/user/uploadbase', data)
       .then((res) => {
         console.log(res.data);
         dispatch(setLoading(false));
@@ -48,8 +48,8 @@ export const saveGetImgs = (data) =>{
 
 export const getImgs = () => {
   return (dispatch) => {
-    axios
-      .get('/api/user/uploadbase')
+    Http
+      .get('/user/uploadbase')
       .then((res) => {
         if(res.data.length > 0){
           //TODO: loop through the res.data array
@@ -65,8 +65,8 @@ export const getImgs = () => {
 export const saveAnnotations = (data ,history) => {
   return (dispatch) => {
     dispatch(setLoading(true));
-    axios
-      .post('/api/annotation/add', data)
+    Http
+      .post('/annotation/add', data)
       .then((res) => {
         console.log(res.data);
         dispatch(setLoading(false));
@@ -83,8 +83,8 @@ export const saveAnnotations = (data ,history) => {
 export const getUserAnnotations = () => {
   return (dispatch) => {
     dispatch(setLoading(true));
-    axios
-      .get('/api/annotation/')
+    Http
+      .get('/annotation/')
       .then((res) => {
         console.log(res.data);
         dispatch({
@@ -102,8 +102,8 @@ export const getUserAnnotations = () => {
 
 export const getAllAnnotations = () => {
   return (dispatch) => {
-    axios
-      .get('/api/annotation/all')
+    Http
+      .get('/annotation/all')
       .then((res) => {
         console.log(res.data)
         dispatch({

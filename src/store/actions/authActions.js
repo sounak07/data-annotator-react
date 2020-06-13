@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
-import axios from 'axios';
-import setAuthToken from '../../util/setAuthToken';
+import Http from '../../services/services'
+import {setAuthToken} from '../../services/services';
 import jwt_decode from 'jwt-decode';
 
 export const saveUser = (userData) => {
@@ -27,8 +27,8 @@ export const errorsSet = (errors) => {
 export const loginUser = (data) => {
   return (dispatch) => {
     dispatch(setLoading(true));
-    axios
-      .post('/api/user/login', data)
+    Http
+      .post('/user/login', data)
       .then((res) => {
         const { token } = res.data;
         localStorage.setItem('jwtToken', token);
@@ -47,8 +47,8 @@ export const loginUser = (data) => {
 export const registerUser = (data, history) => {
   return (dispatch) => {
     dispatch(setLoading(true));
-    axios
-      .post('/api/user/register', data)
+    Http
+      .post('/user/register', data)
       .then((res) => {
         history.push('/login');
         dispatch(setLoading(false));
