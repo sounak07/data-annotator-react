@@ -1,5 +1,5 @@
 You can find the app deployed here : 
-https://gripannotator.netlify.app/dashboard
+https://gripannotator.netlify.app/
 
 Login creds :
 
