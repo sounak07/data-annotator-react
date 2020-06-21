@@ -41,36 +41,36 @@ class Login extends Component {
       <div>
         {isAuth ? this.props.history.push('/dashboard') : <div className="login">
           {loading ? <Loader /> :
-          <div className="container">
-            <div className="row">
-              <div className="col-md-8 m-auto">
-                <h1 className="display-4 text-center">Log In</h1>
-                <p className="lead text-center">Sign in to your account</p>
-                <form noValidate onSubmit={this.submitHandler}>
-                  <Input
-                    type="email"
-                    name="email"
-                    placeholder="email number"
-                    onChange={this.inputHandler}
-                    error={errors.loginemail}
-                    value={this.state.email}
-                  />
-                  <Input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    onChange={this.inputHandler}
-                    error={errors.loginPassword}
-                    value={this.state.password}
-                  />
-                  <input
-                    type="submit"
-                    className="btn btn-info btn-block mt-4"
-                  />
-                </form>
+            <div className="container">
+              <div className="row">
+                <div className="col-md-8 m-auto">
+                  <h1 className="display-4 text-center">Log In</h1>
+                  <p className="lead text-center">Sign in to your account</p>
+                  <form noValidate onSubmit={this.submitHandler}>
+                    <Input
+                      type="email"
+                      name="email"
+                      placeholder="email number"
+                      onChange={this.inputHandler}
+                      error={errors.loginemail}
+                      value={this.state.email}
+                    />
+                    <Input
+                      type="password"
+                      name="password"
+                      placeholder="Password"
+                      onChange={this.inputHandler}
+                      error={errors.loginPassword}
+                      value={this.state.password}
+                    />
+                    <input
+                      type="submit"
+                      className="btn btn-info btn-block mt-4"
+                    />
+                  </form>
+                </div>
               </div>
-            </div>
-          </div>}
+            </div>}
         </div>}
       </div>
     );

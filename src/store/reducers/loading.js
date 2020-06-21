@@ -1,7 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-  loading: false
+  loading: false,
 };
 
 const loadingRed = (state = initialState, action) => {
@@ -9,7 +9,7 @@ const loadingRed = (state = initialState, action) => {
     case actionTypes.LOADING:
       return {
         ...state,
-        loading: action.payload
+        loading: action.payload,
       };
     default:
       return state;

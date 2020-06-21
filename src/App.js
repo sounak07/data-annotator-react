@@ -11,9 +11,9 @@ import Login from './components/auth/login';
 import Register from './components/auth/register';
 import Dashboard from './components/profileDash/dashboard';
 import AddImages from './components/admin-panel';
-import AllImages from './components/allImages/index'
-import ProtectedRoute from './components/ProtectedRoutes'
-import ImageDetail from './components/imageDetails'
+import AllImages from './components/allImages/index';
+import ProtectedRoute from './components/ProtectedRoutes';
+import ImageDetail from './components/imageDetails';
 
 class App extends Component {
   componentDidMount() {

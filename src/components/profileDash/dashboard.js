@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Loader from "../UI/Loader";
-import { getImgs, getUserAnnotations } from "../../store/actions/imageActions";
-import AnnotationList from '../annotationList'
+import Loader from '../UI/Loader';
+import { getImgs, getUserAnnotations } from '../../store/actions/imageActions';
+import AnnotationList from '../annotationList';
 
 class Dash extends Component {
-
   componentDidMount() {
     this.props.getImgs();
     this.props.getUserAnnotations();
@@ -24,26 +23,34 @@ class Dash extends Component {
     return (
       <div>
         <div>
-        <p className="lead text-muted">Welcome {users.email} {isAdmin ? '(Admin)' : null}</p>
+          <p className="lead text-muted">
+            Welcome
+            {users.email}
+            {' '}
+            {isAdmin ? '(Admin)' : null}
+          </p>
         </div>
         <div>
-          {isAdmin && <Link to="/admin" className="btn btn-lg btn-info">
+          {isAdmin && (
+          <Link to="/admin" className="btn btn-lg btn-info">
             Admin Panel
-          </Link>}
+          </Link>
+          )}
         </div>
         <br />
         <div>
           <Link to="/allImages" className="btn btn-lg btn-success">
             Go to Images to Annotate
-         </Link>
+          </Link>
         </div>
-        {loading ? <Loader /> : 
-        <div className="annotation-table" style={{ marginTop: '30px' }}>
-          {userAnnotations.length < 1 ?
-            <h3>No Entries yet!</h3> :
-            <AnnotationList text="My" userAnnotations={userAnnotations} />
-          }
-        </div>}
+        {loading ? <Loader />
+          : (
+            <div className="annotation-table" style={{ marginTop: '30px' }}>
+              {userAnnotations.length < 1
+                ? <h3>No Entries yet!</h3>
+                : <AnnotationList text="My" userAnnotations={userAnnotations} />}
+            </div>
+          )}
       </div>
     );
   }
@@ -52,7 +59,7 @@ class Dash extends Component {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   imgs: state.imgs,
-  load: state.load
+  load: state.load,
 });
 
 export default connect(mapStateToProps, { getImgs, getUserAnnotations })(Dash);
