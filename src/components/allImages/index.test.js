@@ -44,7 +44,7 @@ describe('AllImagesTest', () => {
     //   expect(wrapper.find('#'+d._id)).to.have.lengthOf(1);
     // })
 
-    expect(wrapper.find('div.card')).toHaveLength(1);
+    expect(wrapper.find('div.imgGallery')).toHaveLength(1);
 
   });
 })
