@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, useHistory, Redirect } from 'react-router-dom';
@@ -27,6 +26,7 @@ function AddImages(props) {
 
   useEffect(() => {
     props.getAllAnnotations();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
