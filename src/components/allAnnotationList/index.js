@@ -3,7 +3,7 @@ import React from 'react';
 import AnnotationList from '../annotationList';
 import './index.css';
 
-function AllAnnotationList({ allAnnotations }) {
+export function AllAnnotationList({ allAnnotations }) {
   return (
     <div>
       <div className="panel-group" id="accordion" role="tablist" aria-multiselectable="true">

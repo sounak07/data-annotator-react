@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './index.css';
 
-function AllImages(props) {
+export function AllImages(props) {
   const [imgs, setImgs] = useState([]);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ function AllImages(props) {
           <div className="col-lg-4 col-md-4 col-6" key={img._id}>
             <div className="card">
               <Link to={`img/${img._id}`} className="d-block mb-4 h-100">
-                <img className="card-img-top" src={img.url || 'http://via.placeholder.com/400x300'} alt="" />
+                <img id={img._id} className="card-img-top" src={img.url || 'http://via.placeholder.com/400x300'} alt="" />
                 <div className="card-body text-white rgba-black-light p-2">
                   {img.name}
                 </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function AnnotationList({ userAnnotations, text }) {
+export function AnnotationList({ userAnnotations, text }) {
   return (
     <div>
       <h3>
