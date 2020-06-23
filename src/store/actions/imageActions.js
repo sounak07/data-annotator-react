@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import * as actionTypes from './actionTypes';
 import Http from '../../services/services';
 
@@ -56,6 +57,7 @@ export const saveAnnotations = (data, history) => (dispatch) => {
     .then((res) => {
       console.log(res.data);
       dispatch(setLoading(false));
+      // eslint-disable-next-line no-alert
       alert('Submission Success, Thank You!');
       history.push('/dashboard');
     })

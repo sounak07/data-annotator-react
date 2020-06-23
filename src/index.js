@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-
-import './index.css';
 import {
   createStore, applyMiddleware, combineReducers, compose,
 } from 'redux';
+import thunk from 'redux-thunk';
+
+import './index.css';
 import App from './App';
 import authReducer from './store/reducers/auth';
 import errorReducer from './store/reducers/errorRed';

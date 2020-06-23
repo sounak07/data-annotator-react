@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-class Landing extends Component {
+class Landing extends PureComponent {
   render() {
-    const { isAuth } = this.props.auth;
+    const { auth: { isAuth } } = this.props;
 
     return (
       <div>

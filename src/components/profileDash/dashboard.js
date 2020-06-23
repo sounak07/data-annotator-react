@@ -7,18 +7,17 @@ import AnnotationList from '../annotationList';
 
 class Dash extends Component {
   componentDidMount() {
-    this.props.getImgs();
-    this.props.getUserAnnotations();
+    const { getImgs: getImages, getUserAnnotations: getCurrUserAnnotations } = this.props;
+    getImages();
+    getCurrUserAnnotations();
   }
 
   render() {
-    const { users } = this.props.auth;
-
-    const { userAnnotations } = this.props.imgs;
+    const {
+      load: { loading }, auth: { users }, imgs: { userAnnotations },
+    } = this.props;
 
     const { isAdmin } = users;
-
-    const { loading } = this.props.load;
 
     return (
       <div>

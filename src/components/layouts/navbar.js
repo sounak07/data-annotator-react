@@ -6,11 +6,12 @@ import { logout } from '../../store/actions/authActions';
 class Navbar extends Component {
   onLogOut = (e) => {
     e.preventDefault();
-    this.props.logout();
+    const { logout: logOut } = this.props;
+    logOut();
   };
 
   render() {
-    const { isAuth } = this.props.auth;
+    const { auth: { isAuth } } = this.props;
 
     return (
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
