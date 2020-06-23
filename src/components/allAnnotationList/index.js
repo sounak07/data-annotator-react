@@ -1,6 +1,7 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+// eslint-disable-next-line import/no-named-as-default
 import AnnotationList from '../annotationList';
+
 import './index.css';
 
 export function AllAnnotationList({ allAnnotations }) {

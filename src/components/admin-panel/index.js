@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, useHistory, Redirect } from 'react-router-dom';
@@ -5,6 +6,7 @@ import { storage } from '../../firebase-config';
 import ProgressBar from '../UI/progress';
 import { saveImgs, getAllAnnotations } from '../../store/actions/imageActions';
 
+// eslint-disable-next-line import/no-named-as-default
 import AllAnnotationList from '../allAnnotationList';
 import Loader from '../UI/Loader';
 import './index.css';
@@ -22,7 +24,7 @@ function AddImages(props) {
 
   const history = useHistory();
 
-  const { allAnnotationDetails } = props.imgs;
+  const { imgs: { allAnnotationDetails } } = props;
 
   useEffect(() => {
     props.getAllAnnotations();
@@ -79,9 +81,11 @@ function AddImages(props) {
     props.saveImgs(imgUrls, history);
   };
 
-  const { loading } = props.load;
+  const { load, auth } = props;
 
-  const { users: { isAdmin } } = props.auth;
+  const { loading } = load;
+
+  const { users: { isAdmin } } = auth;
 
   return (
     <div>
@@ -101,8 +105,8 @@ function AddImages(props) {
                 {loading ? <Loader />
                   : (
                     <>
-                      <button onClick={handleUpload} disabled={buttonState} className="btn btn-success">Upload Images</button>
-                      <button style={{ marginLeft: '8px' }} onClick={handleSave} disabled={saveButtonState} className="btn btn-info">Save</button>
+                      <button type="button" onClick={handleUpload} disabled={buttonState} className="btn btn-success">Upload Images</button>
+                      <button type="button" style={{ marginLeft: '8px' }} onClick={handleSave} disabled={saveButtonState} className="btn btn-info">Save</button>
                     </>
                   )}
               </div>
@@ -111,7 +115,8 @@ function AddImages(props) {
               <div className="col-12">
                 <h3 className="detail-title">Entries from all annotators</h3>
                 {allAnnotationDetails.length < 1 && <Loader />}
-                {allAnnotationDetails.length > 0 && <AllAnnotationList allAnnotations={allAnnotationDetails} />}
+                {allAnnotationDetails.length > 0
+                && <AllAnnotationList allAnnotations={allAnnotationDetails} />}
               </div>
             </div>
           </div>

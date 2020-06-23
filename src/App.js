@@ -11,12 +11,14 @@ import Login from './components/auth/login';
 import Register from './components/auth/register';
 import Dashboard from './components/profileDash/dashboard';
 import AddImages from './components/admin-panel';
+// eslint-disable-next-line import/no-named-as-default
 import AllImages from './components/allImages/index';
 import ProtectedRoute from './components/ProtectedRoutes';
 import ImageDetail from './components/imageDetails';
 
 class App extends Component {
   componentDidMount() {
+    // eslint-disable-next-line react/destructuring-assignment
     this.props.checkAuthState();
   }
 

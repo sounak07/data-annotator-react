@@ -6,6 +6,7 @@ import Input from '../UI/input';
 import Loader from '../UI/Loader';
 
 class Register extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     email: '',
     password: '',
@@ -13,8 +14,8 @@ class Register extends Component {
   };
 
   inputHandler = (event) => {
-    const value = event.target.value;
-    const name = event.target.name;
+    const { value } = event.target;
+    const { name } = event.target;
 
     this.setState({
       [name]: value,
@@ -23,68 +24,79 @@ class Register extends Component {
 
   submitHandler = (event) => {
     event.preventDefault();
+    const { email, password, password2 } = this.state;
+
+    const {
+      history, registerUser: registerCurrUser,
+    } = this.props;
+
     const data = {
-      email: this.state.email,
-      password: this.state.password,
-      password2: this.state.password2,
+      email,
+      password,
+      password2,
     };
 
+    // eslint-disable-next-line no-console
     console.log(data);
 
-    this.props.registerUser(data, this.props.history);
+    registerCurrUser(data, history);
   };
 
   render() {
-    const { isAuth } = this.props.auth;
+    const {
+      auth: { isAuth }, load: { loading }, error: { errors }, history,
+    } = this.props;
 
-    const { errors } = this.props.error;
-
-    const { loading } = this.props.load;
+    const { email, password, password2 } = this.state;
 
     return (
       <div>
-        {isAuth ? this.props.history.push('/dashboard') :
-          <div className="register">
-            {loading ? <Loader /> :
-              <div className="container">
-                <div className="row">
-                  <div className="col-md-8 m-auto">
-                    <h1 className="display-4 text-center">Sign Up</h1>
-                    <p className="lead text-center">Create your account</p>
-                    <form noValidate onSubmit={this.submitHandler}>
-                      <Input
-                        type="email"
-                        name="email"
-                        placeholder="Enter email"
-                        onChange={this.inputHandler}
-                        error={errors.signupemail}
-                        value={this.state.email}
-                      />
-                      <Input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        onChange={this.inputHandler}
-                        error={errors.signupPassword}
-                        value={this.state.password}
-                      />
-                      <Input
-                        type="password"
-                        name="password2"
-                        placeholder="Confirm Password"
-                        onChange={this.inputHandler}
-                        error={errors.password2}
-                        value={this.state.password2}
-                      />
-                      <input
-                        type="submit"
-                        className="btn btn-info btn-block mt-4"
-                      />
-                    </form>
+        {isAuth ? history.push('/dashboard')
+          : (
+            <div className="register">
+              {loading ? <Loader />
+                : (
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-md-8 m-auto">
+                        <h1 className="display-4 text-center">Sign Up</h1>
+                        <p className="lead text-center">Create your account</p>
+                        <form noValidate onSubmit={this.submitHandler}>
+                          <Input
+                            type="email"
+                            name="email"
+                            placeholder="Enter email"
+                            onChange={this.inputHandler}
+                            error={errors.signupemail}
+                            value={email}
+                          />
+                          <Input
+                            type="password"
+                            name="password"
+                            placeholder="Password"
+                            onChange={this.inputHandler}
+                            error={errors.signupPassword}
+                            value={password}
+                          />
+                          <Input
+                            type="password"
+                            name="password2"
+                            placeholder="Confirm Password"
+                            onChange={this.inputHandler}
+                            error={errors.password2}
+                            value={password2}
+                          />
+                          <input
+                            type="submit"
+                            className="btn btn-info btn-block mt-4"
+                          />
+                        </form>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>}
-          </div>}
+                )}
+            </div>
+          )}
       </div>
     );
   }
@@ -93,7 +105,7 @@ class Register extends Component {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   error: state.errors,
-  load: state.load
+  load: state.load,
 });
 
 export default connect(mapStateToProps, { registerUser })(withRouter(Register));

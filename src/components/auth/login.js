@@ -3,17 +3,18 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { loginUser } from '../../store/actions/authActions';
 import Input from '../UI/input';
-import Loader from '../UI/Loader'
+import Loader from '../UI/Loader';
 
 class Login extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
     email: '',
     password: '',
   };
 
   inputHandler = (event) => {
-    const value = event.target.value;
-    const name = event.target.name;
+    const { value } = event.target;
+    const { name } = event.target;
 
     this.setState({
       [name]: value,
@@ -22,56 +23,62 @@ class Login extends Component {
 
   submitHandler = (event) => {
     event.preventDefault();
+    const { email, password } = this.state;
+    const { loginUser: loginCurrUser } = this.props;
     const data = {
-      email: this.state.email,
-      password: this.state.password,
+      email,
+      password,
     };
 
-    this.props.loginUser(data);
+    loginCurrUser(data);
   };
 
   render() {
-    const { isAuth } = this.props.auth;
+    const {
+      auth: { isAuth }, load: { loading }, error: { errors }, history,
+    } = this.props;
 
-    const { loading } = this.props.load;
-
-    const { errors } = this.props.error;
+    const { email, password } = this.state;
 
     return (
       <div>
-        {isAuth ? this.props.history.push('/dashboard') : <div className="login">
-          {loading ? <Loader /> :
-            <div className="container">
-              <div className="row">
-                <div className="col-md-8 m-auto">
-                  <h1 className="display-4 text-center">Log In</h1>
-                  <p className="lead text-center">Sign in to your account</p>
-                  <form noValidate onSubmit={this.submitHandler}>
-                    <Input
-                      type="email"
-                      name="email"
-                      placeholder="email number"
-                      onChange={this.inputHandler}
-                      error={errors.loginemail}
-                      value={this.state.email}
-                    />
-                    <Input
-                      type="password"
-                      name="password"
-                      placeholder="Password"
-                      onChange={this.inputHandler}
-                      error={errors.loginPassword}
-                      value={this.state.password}
-                    />
-                    <input
-                      type="submit"
-                      className="btn btn-info btn-block mt-4"
-                    />
-                  </form>
+        {isAuth ? history.push('/dashboard') : (
+          <div className="login">
+            {loading ? <Loader />
+              : (
+                <div className="container">
+                  <div className="row">
+                    <div className="col-md-8 m-auto">
+                      <h1 className="display-4 text-center">Log In</h1>
+                      <p className="lead text-center">Sign in to your account</p>
+                      <form noValidate onSubmit={this.submitHandler}>
+                        <Input
+                          type="email"
+                          name="email"
+                          placeholder="email number"
+                          onChange={this.inputHandler}
+                          error={errors.loginemail}
+                          value={email}
+                        />
+                        <Input
+                          type="password"
+                          name="password"
+                          placeholder="Password"
+                          onChange={this.inputHandler}
+                          error={errors.loginPassword}
+                          value={password}
+                        />
+                        <input
+                          type="submit"
+                          className="btn btn-info btn-block mt-4"
+                        />
+                      </form>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>}
-        </div>}
+              )}
+          </div>
+        )}
       </div>
     );
   }
@@ -80,7 +87,7 @@ class Login extends Component {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   error: state.errors,
-  load: state.load
+  load: state.load,
 });
 
 export default connect(mapStateToProps, { loginUser })(withRouter(Login));

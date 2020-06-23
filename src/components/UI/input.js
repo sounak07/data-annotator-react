@@ -5,7 +5,6 @@ const input = ({
   name,
   placeholder,
   value,
-  label,
   error,
   info,
   type,

@@ -28,12 +28,13 @@ function ImageDetail(props) {
   };
 
   useEffect(() => {
+    const { imgs, match } = props;
     if (props.match.params.id) {
-      const Img = props.imgs.imgs.filter((f) => f._id === props.match.params.id);
+      const Img = imgs.imgs.filter((f) => f._id === match.params.id);
 
       setCurrImg([...Img]);
     }
-  }, [props.imgs.imgs, props.match.params.id]);
+  }, [props]);
 
   useEffect(() => {
     const isValid = () => Object.keys(fields).find((f) => !fields[f]);
@@ -81,12 +82,12 @@ function ImageDetail(props) {
     props.saveAnnotations({ ...fields, imageId: props.match.params.id }, history);
   };
 
-  const { loading } = props.load;
+  const { load: { loading } } = props;
 
   return (
     <div className="image-view">
       <div className="" style={{ marginBottom: '10px' }}>
-        <button onClick={handleGoBack} className="btn btn-info">Go to Images List</button>
+        <button type="button" onClick={handleGoBack} className="btn btn-info">Go to Images List</button>
       </div>
       <div className="row">
         <div className={grid}>
@@ -100,11 +101,11 @@ function ImageDetail(props) {
               </figure>
             </div>
             <div className="col-12 rotate-button-div">
-              <button onClick={rotateClockWise} className="col-12 col-md-4 btn btn-outline-info">Rotate Clockwise</button>
-              <button onClick={rotateAntiClockWise} className="col-12 col-md-4 btn btn-outline-info">Rotate Anti-Clockwise</button>
+              <button type="button" onClick={rotateClockWise} className="col-12 col-md-4 btn btn-outline-info">Rotate Clockwise</button>
+              <button type="button" onClick={rotateAntiClockWise} className="col-12 col-md-4 btn btn-outline-info">Rotate Anti-Clockwise</button>
             </div>
             <div className="col-12 annatation-button-div">
-              <button onClick={handleFillAnnotation} className="col-12 col-md-4 btn btn-outline-success">Fill Annotation</button>
+              <button type="button" onClick={handleFillAnnotation} className="col-12 col-md-4 btn btn-outline-success">Fill Annotation</button>
             </div>
           </div>
           )}
@@ -129,8 +130,8 @@ function ImageDetail(props) {
                   value={fields.details}
                   onChange={handleChange}
                 />
-                <button onClick={handleSubmit} disabled={error} className="btn btn-outline-primary">Submit Annotation</button>
-                <button onClick={handleCancel} style={{ marginLeft: '8px' }} className="btn btn-outline-danger">Cancel</button>
+                <button type="button" onClick={handleSubmit} disabled={error} className="btn btn-outline-primary">Submit Annotation</button>
+                <button type="button" onClick={handleCancel} style={{ marginLeft: '8px' }} className="btn btn-outline-danger">Cancel</button>
               </div>
             )}
         </div>
