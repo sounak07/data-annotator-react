@@ -10,9 +10,10 @@ const setup = (props) => {
   return component;
 };
 
-describe('AllImagesTest', () => {
+describe('All Images', () => {
   let wrapper;
   const props = {
+    dispatch: jest.fn(),
     imgs: {
       imgs: [
         {
@@ -37,12 +38,26 @@ describe('AllImagesTest', () => {
     wrapper = setup(props);
   });
 
-  it('should show images passed', () => {
-    // props.imgs.imgs.map((d) => {
-    //   expect(wrapper.find('#'+d._id)).to.have.lengthOf(1);
-    // })
+  it('should render container div correctly', () => {
+    expect(wrapper.find('.container')).toHaveLength(1);
+  });
 
-    expect(wrapper.find('div.imgGallery')).toHaveLength(1);
+  it('should render all img gallery div correctly', () => {
+    expect(wrapper.find('.allImgGallery')).toHaveLength(1);
+  });
+
+  it('should render no-img-indicate if empty [] is passed recieved correctly', () => {
+    const props2 = {
+      imgs: {
+        imgs: [],
+      },
+    };
+    const wrapper2 = shallow(<AllImages {...props2} />);
+    expect(wrapper2.find('.no-img-indicate')).toHaveLength(1);
+  });
+
+  it('should render imgs div correctly', () => {
+    expect(wrapper.find('img')).toHaveLength(3);
   });
 });
 
