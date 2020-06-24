@@ -6,11 +6,8 @@ import './index.css';
 export function AllImages({ imgs }) {
   return (
     <div className="container">
-
       <h1 className="font-weight-light text-center text-lg-left mt-4 mb-0">Images Gallery</h1>
-
       <hr className="mt-2 mb-5" />
-
       <div className="row text-center text-lg-left allImgGallery">
         {imgs.imgs && imgs.imgs.length > 0 && imgs.imgs.map((img) => (
           <div className="col-lg-4 col-md-4 col-6" key={img._id}>

@@ -3,7 +3,6 @@ import { configure, shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { MemoryRouter } from 'react-router-dom';
 import { AllAnnotationList } from '.';
-// import { AnnotationList } from '../annotationList';
 
 configure({ adapter: new Adapter() });
 
@@ -21,13 +20,13 @@ describe('All Images', () => {
     userEmail: 'sounakume@gmail.com',
     annotations: [{
       _id: '5ee3b52442a2b0c86b77c9fc',
-      type: 'Image for annote',
-      details: 'This is my first annotation',
+      type: 'Image 1 for annote',
+      details: 'This is my 2nd annotation',
       imageId: '5ee1ec76599a8146972ce0ed',
     },
     {
       _id: '5ee3b52442a2b0c86b77c9fc',
-      type: 'Image for annote',
+      type: 'Image for to annote',
       details: 'This is my first annotation',
       imageId: '5ee1ec76599a8146972ce0ed',
     }],
@@ -76,6 +75,21 @@ describe('All Images', () => {
       </MemoryRouter>,
     );
     expect(wrapper2.find('.anno-list-table-tr')).toHaveLength(4);
+  });
+
+  it('should render first row of first table correctly ', () => {
+    const wrapper2 = mount(
+      <MemoryRouter>
+        <AllAnnotationList allAnnotations={props} />
+      </MemoryRouter>,
+    );
+    const table1 = wrapper2.find('.anno-list-table').at(0);
+
+    const firstRowCol = table1.at(0).find('td').map((column) => column.text());
+    expect(firstRowCol.length).toEqual(6);
+    expect(firstRowCol[0]).toEqual('Image 1 for annote');
+    expect(firstRowCol[1]).toEqual('This is my 2nd annotation');
+    expect(firstRowCol[2]).toEqual('Go to Image');
   });
 });
 
